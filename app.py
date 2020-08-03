@@ -10,7 +10,12 @@ def index():
 @app.route("/success", methods=['POST']) #decorator to access the url /success
 
 def success():
-    return render_template("success.html")
+    if request.method == 'POST':
+        email=request.form["email_address"]
+        height=request.form["height"]
+        print(email)
+        print(height)
+        return render_template("success.html")
 
 if __name__ == '__main__':
     app.debug=True
