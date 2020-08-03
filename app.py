@@ -13,8 +13,8 @@ class Data(db.Model): #sqlalchemy connect to the database
 
 
     def __init__(self,email_,height_): #initialize the table
-        self.email=email_
-        self.height=height_
+        self.email_=email_
+        self.height_=height_
 
 #to commit the table in the database, go to terminal and enter the python shell and write: from app (python file) import db and after d.create_all() and it will create the tables in the database
 
@@ -29,9 +29,13 @@ def success():
     if request.method == 'POST':
         email=request.form["email_address"]
         height=request.form["height"]
-
-        return render_template("success.html")
+        if db.session.query(Data).filter(Data.email_==email).count() == 0: #filtering the column if the email is already in the database
+            data=Data(email,height) #initiate the class and the values will be recognise by the sqlalchemy add method
+            db.session.add(data) #add the values to the database
+            db.session.commit() #commit the changes to the database
+            return render_template("success.html")
+    return render_template("index.html", text="Seems this email address was already used!")
 
 if __name__ == '__main__':
     app.debug=True
-    app.run()
+    app.run(port=8000)
