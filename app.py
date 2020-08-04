@@ -4,7 +4,8 @@ from send_email import send_email
 from sqlalchemy.sql import func
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']='postgresql://postgres:postgred@localhost/height_collector' #connect to the postgresql app to the database with an address of: username@password.localhost/name_of_database (of postresql)
+# app.config['SQLALCHEMY_DATABASE_URI']='postgresql://postgres:postgred@localhost/height_collector' #connect to the local postgresql app to the database with an address of: username@password.localhost/name_of_database (of postresql)
+app.config['SQLALCHEMY_DATABASE_URI']='postgres://ubweqwxgrqgmpj:1a450c945e3928503aa5bc8ca25b2d93034e38030b50393ea0eed0e61d8426d5@ec2-34-237-89-96.compute-1.amazonaws.com:5432/d3vhdu0g1o1l5b?sslmode=require'
 db=SQLAlchemy(app) #sqlalchemy object
 
 class Data(db.Model): #sqlalchemy connect to the database
