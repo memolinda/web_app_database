@@ -46,8 +46,6 @@ def success():
     return render_template("index.html", text="Seems this email address was already used!")
 
 if __name__ == '__main__':
-    PORT = process.env.PORT || '8080'
 
     app.debug=True
-    app.set("port", PORT)
     app.run()
